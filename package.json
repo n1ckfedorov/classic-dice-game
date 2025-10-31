@@ -1,0 +1,52 @@
+{
+  "name": "classic-dice-game",
+  "author": "Nick Fedorov",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build --webpack",
+    "start": "next start",
+    "clean": "rimraf .next out",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "check:types": "tsc --noEmit --pretty",
+    "commit": "commit"
+  },
+  "dependencies": {
+    "babel-plugin-react-compiler": "^1.0.0",
+    "next": "^16.0.0",
+    "postcss": "^8.5.6",
+    "postcss-load-config": "^6.0.1",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0"
+  },
+  "optionalDependencies": {
+    "@tailwindcss/oxide-linux-x64-gnu": "^4.1.16",
+    "lightningcss-linux-x64-gnu": "^1.30.2"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^6.1.0",
+    "@commitlint/cli": "^20.1.0",
+    "@commitlint/config-conventional": "^20.0.0",
+    "@commitlint/prompt-cli": "^20.1.0",
+    "@eslint-react/eslint-plugin": "^2.2.4",
+    "@faker-js/faker": "^10.1.0",
+    "@next/eslint-plugin-next": "^16.0.0",
+    "@tailwindcss/postcss": "^4.1.16",
+    "@types/node": "^24.9.1",
+    "@types/react": "^19.2.2",
+    "eslint": "^9.38.0",
+    "eslint-plugin-format": "^1.0.2",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "eslint-plugin-tailwindcss": "^4.0.0-beta.0",
+    "lefthook": "^2.0.2",
+    "lightningcss": "^1.30.2",
+    "rimraf": "^6.0.1",
+    "tailwindcss": "^4.1.16",
+    "typescript": "^5.9.3"
+  }
+}
