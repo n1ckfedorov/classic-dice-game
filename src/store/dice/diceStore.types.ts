@@ -11,6 +11,8 @@ export type DiceStore = {
   targetPercent: number;
   direction: BetDirection;
   gameResults: GameResult[];
+  isSoundMuted: boolean;
+  isMovieMode: boolean;
   setGameConfig: (config: GameConfig) => void;
   setBalance: (balance: number) => void;
   setCurrentBet: (bet: Bet | null) => void;
@@ -22,4 +24,8 @@ export type DiceStore = {
   setDirection: (direction: BetDirection) => void;
   addGameResult: (result: GameResult) => void;
   resetGame: () => void;
+  setIsSoundMuted: (muted: boolean) => void;
+  toggleSound: () => void;
+  setIsMovieMode: (mode: boolean) => void;
+  toggleMovieMode: () => void;
 };

@@ -34,7 +34,7 @@ export const BetAmountSlider = ({ ref, value, min, max, onChangeAction, disabled
         disabled={disabled}
         className={cn(
           'flex h-8 items-center justify-center rounded-l-lg rounded-r-none border-r border-layer5 px-3 text-sm font-bold text-primary transition-colors bg-layer5',
-          'hover:bg-layer2 active:scale-95',
+          'hover:bg-layer2 ',
           'disabled:cursor-not-allowed disabled:opacity-50',
         )}
       >
@@ -77,7 +77,7 @@ export const BetAmountSlider = ({ ref, value, min, max, onChangeAction, disabled
         disabled={disabled}
         className={cn(
           'flex h-8 items-center justify-center rounded-l-none rounded-r-lg border-l border-layer5 px-3 text-sm font-bold text-primary transition-colors bg-layer5',
-          'hover:bg-layer2 active:scale-95',
+          'hover:bg-layer2 ',
           'disabled:cursor-not-allowed disabled:opacity-50',
         )}
       >

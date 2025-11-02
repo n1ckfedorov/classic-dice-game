@@ -2,7 +2,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 export type SvgProps = {
-  name: 'arrow-right' | 'arrow-up' | 'bet' | 'chance' | 'close' | 'copy' | 'garant' | 'info' | 'link' | 'mark' | 'star' | 'stats' | 'switch';
+  name: 'arrow-right' | 'arrow-up' | 'bet' | 'chance' | 'close' | 'copy' | 'garant' | 'info' | 'like' | 'link' | 'mark' | 'movie' | 'sound' | 'sound-on' | 'star' | 'star-big' | 'stats' | 'switch' | 'tg';
   size?: string | number;
   className?: string;
   strokeWidth?: string | number;

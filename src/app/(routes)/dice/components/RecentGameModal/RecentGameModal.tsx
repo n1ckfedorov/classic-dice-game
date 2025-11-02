@@ -176,7 +176,7 @@ const GameContent = ({ onCloseAction, selectedGameResult }: GameContentProps) =>
                   <div className="rounded-xl">
                     <div className="mt-2.5 flex justify-between rounded-xl bg-layer3 py-4 dark:bg-layer5">
                       {/* Result */}
-                      <div className="border-third mr-1.5 flex h-10 flex-1 flex-col items-center justify-center border-r text-secondary">
+                      <div className="mr-1.5 flex h-10 flex-1 flex-col items-center justify-center border-r border-third text-secondary">
                         <div className="flex h-5 items-center justify-center text-sm sm:text-xs">
                           <Icon name="stats" className="mr-2 w-4 text-[#24EE89]" />
 
@@ -187,7 +187,7 @@ const GameContent = ({ onCloseAction, selectedGameResult }: GameContentProps) =>
                         </div>
                       </div>
                       {/* Bet */}
-                      <div className="border-third mr-1.5 flex h-10 flex-1 flex-col items-center justify-center border-r text-secondary">
+                      <div className="mr-1.5 flex h-10 flex-1 flex-col items-center justify-center border-r border-third text-secondary">
                         <div className="flex h-5 items-center justify-center text-sm sm:text-xs">
                           <Icon name="bet" className="mr-2 w-4 text-[#0f62fe]" />
                           Bet

@@ -82,7 +82,7 @@ export function Tabs({ activeTab, onTabChangeAction }: TabsProps) {
             onTabChangeAction(tab.id);
           }}
           disabled={tab.disabled}
-          className={cn('relative flex-1 z-10 h-12 px-3 text-sm overflow-hidden font-medium transition-colors', activeTab === tab.id
+          className={cn('relative flex-1 z-10 h-12 px-3 text-sm overflow-hidden font-extrabold transition-colors', activeTab === tab.id
             ? 'text-primary'
             : 'text-muted-foreground', tab.disabled && 'cursor-not-allowed opacity-50')}
           transition={{

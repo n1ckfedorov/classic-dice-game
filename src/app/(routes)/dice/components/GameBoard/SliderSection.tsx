@@ -52,7 +52,7 @@ export function SliderSection({ value, direction, disabled, gameConfig, onValueC
       />
 
       <div className="relative flex h-14 items-start px-4 pr-[5px]">
-        <div className="relative flex h-6 flex-1 items-center justify-between px-2 pt-5.5 text-sm text-muted-foreground">
+        <div className="relative flex h-6 flex-1 items-center justify-between px-2 pt-5.5 text-sm font-semibold text-muted-foreground">
 
           <span style={{ left: `${mapValueToVisualPercent(minTarget, minTarget, maxTarget)}%` }}>
             0

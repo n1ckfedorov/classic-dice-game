@@ -36,9 +36,9 @@ export function GameInfo({
   return (
     <div className="mx-0 grid grid-cols-3 gap-2  rounded-xl bg-layer5 px-2 py-2 text-sm sm:mt-12 md:mt-24 lg:mx-3 lg:mt-38">
       <div className="flex flex-col gap-1">
-        <label htmlFor="win-chance-input" className="text-sm font-medium text-muted-foreground">Payout</label>
-        <div className="relative  font-normal">
-          <div className="input h-10 border-none bg-layer4 pr-10">
+        <label htmlFor="win-chance-input" className="text-sm font-semibold text-muted-foreground">Payout</label>
+        <div className="relative  font-extrabold">
+          <div className="input h-10 border-none bg-layer4 pr-10 font-extrabold">
             <input
               id="payout-input"
               type="decimal"
@@ -57,12 +57,12 @@ export function GameInfo({
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="win-chance-input" className="text-sm font-medium text-muted-foreground">
+        <label htmlFor="win-chance-input" className="text-sm font-semibold text-muted-foreground">
           Roll
           {' '}
           {direction === 'under' ? 'Under' : 'Over'}
         </label>
-        <div className="relative  font-normal">
+        <div className="relative  font-extrabold">
           <div className="input h-10 border-none bg-layer4 pr-10">
             {formatWithPrecision(targetPercent, precision)}
           </div>
@@ -73,9 +73,9 @@ export function GameInfo({
       </div>
 
       <div className="flex flex-col gap-1">
-        <label htmlFor="win-chance-input" className="text-sm font-medium text-muted-foreground">Win Chance</label>
+        <label htmlFor="win-chance-input" className="text-sm font-semibold text-muted-foreground">Win Chance</label>
         <div className="relative  font-normal">
-          <div className="input h-10 border-none bg-layer4 pr-10">
+          <div className="input h-10 border-none bg-layer4 pr-10 font-extrabold">
             <input
               id="win-chance-input"
               type="decimal"

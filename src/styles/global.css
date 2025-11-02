@@ -6,7 +6,7 @@
 /* Fonts */
 @font-face {
   font-family: 'AvertaStd';
-  src: url('/assets/fonts/AvertaStd-Regular.ttf') format('opentype');
+  src: url('/assets/fonts/AvertaStd-Regular.woff2') format('woff2');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -14,7 +14,7 @@
 
 @font-face {
   font-family: 'AvertaStd';
-  src: url('/assets/fonts/AvertaStd-SemiBold.ttf') format('opentype');
+  src: url('/assets/fonts/AvertaStd-Semibold.woff2') format('woff2');
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -22,7 +22,7 @@
 
 @font-face {
   font-family: 'AvertaStd';
-  src: url('/assets/fonts/AvertaStd-ExtraBold.ttf') format('opentype');
+  src: url('/assets/fonts/AvertaStd-ExtraBold.woff2') format('woff2');
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -50,6 +50,7 @@
   --color-input_darken: rgb(30, 33, 33);
   --color-input_bright: rgb(41, 45, 46);
   --color-Button-BrightBg: #464f50;
+  --color-third: #e4eaf019;
 
   /* Gradients */
   --background-image-gradient-green: linear-gradient(90deg, rgb(36, 238, 137), rgb(159, 232, 113));

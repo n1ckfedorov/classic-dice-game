@@ -1,8 +1,11 @@
 'use client';
 
+import confetti from 'canvas-confetti';
 import { useEffect, useRef, useState } from 'react';
 import { useDiceGame } from '@/hooks/useDiceGame';
 import { useGameSounds } from '@/hooks/useGameSounds';
+import { useMediaQuery } from '@/hooks/useMediaQuery';
+import { useDiceStore } from '@/store/dice';
 import { formatPayout, formatWithPrecision } from '@/utils/dice';
 import { GameHistory } from '../GameHistory';
 import { Cube } from './Cube';
@@ -29,9 +32,21 @@ export function Game() {
   const lastResult = gameResults[gameResults.length - 1];
 
   // Sound management
-  const { playRollSound, stopRollSound, playWinSound } = useGameSounds();
+  const isSoundMuted = useDiceStore(state => state.isSoundMuted);
+  const { playRollSound, stopRollSound, playWinSound, playSliderSound, stopSliderSound } = useGameSounds({ isSoundMuted });
   const previousRollingRef = useRef(false);
   const previousWinBetIdRef = useRef<string | undefined>(undefined);
+  const isMountedRef = useRef(false);
+
+  const isDesktop = useMediaQuery({ minWidth: 1024 });
+
+  // Initialize previousWinBetIdRef on mount to prevent confetti on page reload
+  useEffect(() => {
+    if (!isMountedRef.current && lastResult?.data.bet_id) {
+      previousWinBetIdRef.current = lastResult.data.bet_id;
+      isMountedRef.current = true;
+    }
+  }, [lastResult?.data.bet_id]);
 
   // Cube animation
   const { animatedValue } = useCubeAnimation({
@@ -73,7 +88,6 @@ export function Game() {
   // Synchronize sliderValue with targetPercent (only when not rolling)
   useEffect(() => {
     if (!isRolling && currentRoll === null) {
-      // Use setTimeout to avoid conflicts with state updates
       const timeoutId = setTimeout(() => {
         setSliderValue(targetPercent);
       }, 0);
@@ -87,30 +101,48 @@ export function Game() {
   // Handle rolling sound
   useEffect(() => {
     if (isRolling && !previousRollingRef.current) {
-      // Started rolling - play sound
       playRollSound();
       previousRollingRef.current = true;
     } else if (!isRolling && previousRollingRef.current) {
-      // Stopped rolling - stop sound
       stopRollSound();
       previousRollingRef.current = false;
     }
   }, [isRolling, playRollSound, stopRollSound]);
 
-  // Handle win sound (only when roll is complete and result is win)
   useEffect(() => {
     if (
       !isRolling
       && lastResult?.data.is_win
       && lastResult?.data.bet_id !== previousWinBetIdRef.current
     ) {
-      // New win after roll completion - play win sound
       playWinSound();
       previousWinBetIdRef.current = lastResult.data.bet_id;
-    }
-  }, [lastResult, isRolling, playWinSound]);
 
-  // Event handlers
+      // Show confetti on win (desktop only)
+      if (isDesktop) {
+        const end = Date.now() + 1 * 300; // 300ms
+        const colors = ['#a786ff', '#fd8bbc', '#eca184', '#f8deb1'];
+        const frame = () => {
+          if (Date.now() > end) {
+            return;
+          }
+          confetti({
+            particleCount: 2,
+            angle: 120,
+            spread: 55,
+            startVelocity: 60,
+            origin: { x: 1, y: 0.5 },
+            colors,
+            gravity: 0.05,
+            zIndex: 0,
+          });
+          requestAnimationFrame(frame);
+        };
+        frame();
+      }
+    }
+  }, [lastResult, isRolling, playWinSound, isDesktop]);
+
   const { handleDirectionToggle, handlePayoutChange, handleWinChanceChange, handleSliderChange } = useGameHandlers({
     targetPercent,
     direction,
@@ -121,11 +153,12 @@ export function Game() {
     setTargetPercent,
     setDirection,
     setAnimatedValue: () => {
-      // animatedValue is managed in useCubeAnimation
     },
     setSliderValue,
     setPayoutInput,
     setWinChanceInput,
+    playSliderSound,
+    stopSliderSound,
   });
 
   return (
@@ -133,11 +166,8 @@ export function Game() {
     <div className="hide-scrollbar order-1 col-span-full  flex flex-col overflow-x-scroll rounded-t-xl bg-layer3 lg:order-2 lg:col-span-1 lg:h-full lg:rounded-tl-none lg:rounded-tr-xl lg:pt-2 xl:relative ">
       <GameHistory />
       <div className="mt-12 lg:mt-20">
-        {/* Main Game Area */}
         <div className=" w-full flex-1 grow flex-col items-center justify-center overflow-hidden rounded-lg p-2">
-          {/* Gradient Slider with Cube */}
           <div className="relative">
-
             <Cube
               value={cubeValue}
               isWin={isWin}
@@ -147,7 +177,6 @@ export function Game() {
               maxTarget={gameConfig?.custom_settings.max_target}
               animatedValue={animatedValue}
             />
-
             <SliderSection
               value={sliderValue}
               direction={direction}
@@ -156,7 +185,6 @@ export function Game() {
               onValueChangeAction={handleSliderChange}
             />
           </div>
-
           <GameInfo
             targetPercent={targetPercent}
             direction={direction}

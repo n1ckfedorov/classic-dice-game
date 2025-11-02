@@ -1,5 +1,5 @@
 import type { BetDirection, GameConfig } from '@/types';
-import { useCallback } from 'react';
+import { useCallback, useRef } from 'react';
 import { calculateMultiplier, formatAmount, formatPayout, formatWithPrecision } from '@/utils/dice';
 
 type UseGameHandlersProps = {
@@ -15,6 +15,8 @@ type UseGameHandlersProps = {
   setSliderValue: (value: number) => void;
   setPayoutInput: (value: string) => void;
   setWinChanceInput: (value: string) => void;
+  playSliderSound: () => void;
+  stopSliderSound: () => void;
 };
 
 export function useGameHandlers({
@@ -30,10 +32,13 @@ export function useGameHandlers({
   setSliderValue,
   setPayoutInput,
   setWinChanceInput,
+  playSliderSound,
+  stopSliderSound,
 }: UseGameHandlersProps) {
   const rtp = gameConfig?.rtp ?? 100;
   const maxTarget = gameConfig?.custom_settings.max_target ?? 99;
   const minTarget = gameConfig?.custom_settings.min_target ?? 1;
+  const stopSoundTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleDirectionToggle = useCallback(() => {
     const newDirection: BetDirection = direction === 'under' ? 'over' : 'under';
@@ -109,8 +114,21 @@ export function useGameHandlers({
       const newWinChance = direction === 'under' ? newValue : 100 - newValue;
       setPayoutInput(formatPayout(newMultiplier));
       setWinChanceInput(formatWithPrecision(newWinChance, precision));
+
+      // Play slider sound
+      playSliderSound();
+
+      // Clear previous timeout
+      if (stopSoundTimeoutRef.current) {
+        clearTimeout(stopSoundTimeoutRef.current);
+      }
+
+      // Stop sound after slider stops moving (debounce)
+      stopSoundTimeoutRef.current = setTimeout(() => {
+        stopSliderSound();
+      }, 150);
     }
-  }, [isRolling, currentRoll, direction, precision, rtp, setTargetPercent, setSliderValue, setPayoutInput, setWinChanceInput]);
+  }, [isRolling, currentRoll, direction, precision, rtp, setTargetPercent, setSliderValue, setPayoutInput, setWinChanceInput, playSliderSound, stopSliderSound]);
 
   return {
     handleDirectionToggle,
