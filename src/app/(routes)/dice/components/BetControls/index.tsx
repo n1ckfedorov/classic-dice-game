@@ -54,8 +54,8 @@ export const BetControls = () => {
   return (
     <div className="order-2 col-span-full flex flex-col gap-3 rounded-t-none border-r border-input border-layer5 bg-layer4 pt-1 lg:relative lg:order-none lg:col-span-1 lg:h-full lg:overflow-y-auto lg:rounded-tl-xl lg:pt-0.5">
 
-      <div className="flex flex-col gap-4 p-4">
-        <Tabs activeTab={activeTab} onTabChangeAction={setActiveTab} />
+      <Tabs activeTab={activeTab} onTabChangeAction={setActiveTab} />
+      <div className="flex flex-col px-3 pt-2">
 
         {/* Amount Input */}
         <div className="flex flex-col gap-2">

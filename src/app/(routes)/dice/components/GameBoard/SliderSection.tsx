@@ -51,37 +51,22 @@ export function SliderSection({ value, direction, disabled, gameConfig, onValueC
         className="cursor-pointer"
       />
 
-      <div className="relative flex h-14 items-center px-4">
-        <div className="relative flex h-6 flex-1 items-center justify-between px-2">
+      <div className="relative flex h-14 items-start px-4 pr-[5px]">
+        <div className="relative flex h-6 flex-1 items-center justify-between px-2 pt-5.5 text-sm text-muted-foreground">
 
-          <span
-            className=" text-xs font-medium text-muted-foreground"
-            style={{ left: `${mapValueToVisualPercent(minTarget, minTarget, maxTarget)}%` }}
-          >
+          <span style={{ left: `${mapValueToVisualPercent(minTarget, minTarget, maxTarget)}%` }}>
             0
           </span>
-          <span
-            className=" text-xs font-medium text-muted-foreground"
-            style={{ left: `${mapValueToVisualPercent(minTarget + (maxTarget - minTarget) * 0.25, minTarget, maxTarget)}%` }}
-          >
+          <span style={{ left: `${mapValueToVisualPercent(minTarget + (maxTarget - minTarget) * 0.25, minTarget, maxTarget)}%` }}>
             25
           </span>
-          <span
-            className=" text-xs font-medium text-muted-foreground"
-            style={{ left: `${mapValueToVisualPercent(minTarget + (maxTarget - minTarget) * 0.5, minTarget, maxTarget)}%` }}
-          >
+          <span style={{ left: `${mapValueToVisualPercent(minTarget + (maxTarget - minTarget) * 0.5, minTarget, maxTarget)}%` }}>
             50
           </span>
-          <span
-            className=" text-xs font-medium text-muted-foreground"
-            style={{ left: `${mapValueToVisualPercent(minTarget + (maxTarget - minTarget) * 0.75, minTarget, maxTarget)}%` }}
-          >
+          <span style={{ left: `${mapValueToVisualPercent(minTarget + (maxTarget - minTarget) * 0.75, minTarget, maxTarget)}%` }}>
             75
           </span>
-          <span
-            className=" text-xs font-medium text-muted-foreground"
-            style={{ left: `${mapValueToVisualPercent(maxTarget, minTarget, maxTarget)}%` }}
-          >
+          <span style={{ left: `${mapValueToVisualPercent(maxTarget, minTarget, maxTarget)}%` }}>
             100
           </span>
         </div>

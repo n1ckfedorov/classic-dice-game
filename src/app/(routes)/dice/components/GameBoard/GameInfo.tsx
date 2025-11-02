@@ -34,10 +34,10 @@ export function GameInfo({
   onWinChanceBlurAction,
 }: GameInfoProps) {
   return (
-    <div className="grid grid-cols-3 gap-2 rounded-xl  bg-layer5 px-2 py-2 text-sm sm:mt-12 md:mt-24 lg:m-auto lg:mt-52 lg:max-w-[50rem]">
+    <div className="mx-0 grid grid-cols-3 gap-2  rounded-xl bg-layer5 px-2 py-2 text-sm sm:mt-12 md:mt-24 lg:mx-3 lg:mt-38">
       <div className="flex flex-col gap-1">
         <label htmlFor="win-chance-input" className="text-sm font-medium text-muted-foreground">Payout</label>
-        <div className="relative  font-extrabold">
+        <div className="relative  font-normal">
           <div className="input h-10 border-none bg-layer4 pr-10">
             <input
               id="payout-input"
@@ -62,7 +62,7 @@ export function GameInfo({
           {' '}
           {direction === 'under' ? 'Under' : 'Over'}
         </label>
-        <div className="relative  font-extrabold">
+        <div className="relative  font-normal">
           <div className="input h-10 border-none bg-layer4 pr-10">
             {formatWithPrecision(targetPercent, precision)}
           </div>
@@ -74,7 +74,7 @@ export function GameInfo({
 
       <div className="flex flex-col gap-1">
         <label htmlFor="win-chance-input" className="text-sm font-medium text-muted-foreground">Win Chance</label>
-        <div className="relative  font-extrabold">
+        <div className="relative  font-normal">
           <div className="input h-10 border-none bg-layer4 pr-10">
             <input
               id="win-chance-input"

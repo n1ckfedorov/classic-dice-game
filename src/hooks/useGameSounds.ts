@@ -18,7 +18,7 @@ export function useGameSounds() {
       rollAudioRef.current.volume = 0.1;
 
       winAudioRef.current = new Audio('assets/sounds/win.mp3');
-      winAudioRef.current.volume = 0.01;
+      winAudioRef.current.volume = 0.25;
     }
 
     return () => {
@@ -75,7 +75,7 @@ export function useGameSounds() {
     }
 
     try {
-      winAudioRef.current.currentTime = 0.2;
+      winAudioRef.current.currentTime = 0.3;
       winAudioRef.current.play().catch((error) => {
         console.warn('Failed to play win sound:', error);
       });

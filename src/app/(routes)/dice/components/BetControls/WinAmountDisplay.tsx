@@ -18,7 +18,7 @@ export function WinAmountDisplay({ value }: WinAmountDisplayProps) {
 
     <div
       role="group"
-      className={cn('flex flex-col gap-1 text-left', disabled && 'opacity-50')}
+      className={cn('flex flex-col gap-1 text-left mt-3', disabled && 'opacity-50')}
     >
       <span className="px-1 text-sm font-semibold text-secondary">
         Win Amount

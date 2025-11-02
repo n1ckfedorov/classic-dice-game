@@ -1,6 +1,6 @@
 import type { BetDirection, GameConfig } from '@/types';
 import { useCallback } from 'react';
-import { calculateMultiplier, formatPayout, formatWithPrecision } from '@/utils/dice';
+import { calculateMultiplier, formatAmount, formatPayout, formatWithPrecision } from '@/utils/dice';
 
 type UseGameHandlersProps = {
   targetPercent: number;
@@ -54,7 +54,8 @@ export function useGameHandlers({
     if (isRolling) {
       return;
     }
-    setPayoutInput(value);
+    const formattedValue = formatAmount(value);
+    setPayoutInput(formattedValue);
     const numValue = Number.parseFloat(value);
     if (!Number.isNaN(numValue) && numValue >= 1.01) {
       const baseMultiplier = numValue * (100 / rtp);
@@ -79,8 +80,9 @@ export function useGameHandlers({
     if (isRolling) {
       return;
     }
-    setWinChanceInput(value);
-    const numValue = Number.parseFloat(value);
+    const formattedValue = formatAmount(value);
+    setWinChanceInput(formattedValue);
+    const numValue = Number.parseFloat(formattedValue);
     if (!Number.isNaN(numValue) && numValue >= minTarget && numValue <= maxTarget) {
       const newTargetPercent = direction === 'under' ? numValue : 100 - numValue;
       if (newTargetPercent >= minTarget && newTargetPercent <= maxTarget) {

@@ -1,6 +1,6 @@
 import type { GameConfig } from '@/types';
 import { useCallback, useEffect, useState } from 'react';
-import { calculateMultiplier } from '@/utils/dice';
+import { calculateMultiplier, formatAmount } from '@/utils/dice';
 
 type UseBetHandlersProps = {
   gameConfig: GameConfig | null;
@@ -35,45 +35,10 @@ export function useBetHandlers({
   }, [betAmountInput, setBetAmount]);
 
   const handleAmountChange = useCallback((value: string) => {
-    setBetAmountInput(value);
+    const formattedValue = formatAmount(value);
+    setBetAmountInput(formattedValue);
     setError('');
   }, []);
-
-  // Calculate step for arrows (5% of current amount, minimum min_bet)
-  const getStep = useCallback((current: number) => {
-    if (!gameConfig) {
-      return 1;
-    }
-    if (current === 0) {
-      return gameConfig.min_bet;
-    }
-    const percentStep = Math.max(gameConfig.min_bet, Math.floor(current * 0.05));
-    return Math.max(gameConfig.min_bet, percentStep);
-  }, [gameConfig]);
-
-  const handleIncrement = useCallback(() => {
-    if (!gameConfig) {
-      return;
-    }
-    const current = Number.parseFloat(betAmountInput) || 0;
-    const step = getStep(current);
-    const newAmount = Math.min(current + step, balance, gameConfig.max_bet);
-    setBetAmountInput(newAmount.toString());
-    setError('');
-  }, [betAmountInput, balance, gameConfig, getStep]);
-
-  const handleDecrement = useCallback(() => {
-    if (!gameConfig) {
-      return;
-    }
-    const current = Number.parseFloat(betAmountInput) || 0;
-    if (current > 0) {
-      const step = getStep(current);
-      const newAmount = Math.max(current - step, 0, gameConfig.min_bet);
-      setBetAmountInput(newAmount.toString());
-      setError('');
-    }
-  }, [betAmountInput, gameConfig, getStep]);
 
   const handleQuickBet = useCallback((amount: number) => {
     if (!gameConfig) {
@@ -165,8 +130,6 @@ export function useBetHandlers({
     setBetAmountInput,
     setActiveTab,
     handleAmountChange,
-    handleIncrement,
-    handleDecrement,
     handleQuickBet,
     handleQuickBetMultiplier,
     handleMaxBet,

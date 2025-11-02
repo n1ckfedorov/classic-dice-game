@@ -49,7 +49,7 @@ export function Cube({ value, precision, isWin, winKey, animatedValue, minTarget
           priority
           fetchPriority="high"
         />
-        <span className="relative z-10 text-base font-extrabold lg:text-xl">
+        <span className="relative z-10 text-base font-extrabold lg:text-2xl">
           {formatWithPrecision(value, precision)}
         </span>
       </motion.div>
