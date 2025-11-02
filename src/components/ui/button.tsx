@@ -1,7 +1,10 @@
 import type { VariantProps } from 'class-variance-authority';
+import type { LinkProps as NextLinkProps } from 'next/link';
+import { Slot } from '@radix-ui/react-slot';
 import { cva } from 'class-variance-authority';
+import { Loader2 } from 'lucide-react';
+import Link from 'next/link';
 import * as React from 'react';
-
 import { cn } from '@/lib/utils';
 
 const buttonVariants = cva(
@@ -24,20 +27,53 @@ const buttonVariants = cva(
   },
 );
 
-function Button({
-  className,
-  variant,
-  size,
-  ...props
-}: React.ComponentProps<'button'>
-  & VariantProps<typeof buttonVariants>) {
+export type ButtonProps = {
+  asChild?: boolean;
+  textColor?: string;
+  href?: string;
+  LinkProps?: NextLinkProps;
+  target?: string;
+  isLoading?: boolean;
+} & React.ButtonHTMLAttributes<HTMLButtonElement>
+& VariantProps<typeof buttonVariants>;
+
+const Button = (
+  { ref, className, variant, size, textColor, asChild = false, href, target, type = 'button', LinkProps, isLoading = false, ...props }: ButtonProps & { ref?: React.RefObject<HTMLButtonElement | null> },
+) => {
+  const isLink = !!href;
+  let Comp: React.ElementType;
+
+  if (asChild) {
+    Comp = Slot;
+  } else if (isLink) {
+    Comp = Link;
+  } else {
+    Comp = 'button';
+  }
+
+  const linkProps = isLink ? { href, target, ...LinkProps } : {};
+  const buttonProps = isLink ? {} : { ref, type };
+
   return (
-    <button
-      type="button"
-      className={cn(buttonVariants({ variant, size, className }))}
+    <Comp
+      className={cn(
+        buttonVariants({ size, variant, className }),
+        props.disabled && 'cursor-not-allowed opacity-50',
+        isLoading
+        && 'pointer-events-none opacity-50 flex items-center gap-2 flex-row-reverse',
+        textColor,
+      )}
+      {...linkProps}
+      {...buttonProps}
       {...props}
-    />
+    >
+      <>
+        {isLoading && <Loader2 className="size-4 animate-spin" />}
+        {props.children}
+      </>
+    </Comp>
   );
-}
+};
+Button.displayName = 'Button';
 
 export { Button };

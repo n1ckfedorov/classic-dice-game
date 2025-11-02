@@ -84,6 +84,7 @@ export const BetControls = () => {
           disabled={isRolling}
           betAmount={currentBetAmount}
           balance={balance}
+          isLoading={isRolling}
         />
 
         <ErrorMessage message={error} />

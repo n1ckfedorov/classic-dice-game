@@ -8,9 +8,10 @@ type RollButtonProps = {
   disabled?: boolean;
   betAmount: number;
   balance: number;
+  isLoading: boolean;
 };
 
-export function RollButton({ onClickAction, disabled = false, betAmount, balance }: RollButtonProps) {
+export function RollButton({ onClickAction, disabled = false, betAmount, balance, isLoading }: RollButtonProps) {
   const isDisabled = disabled || (betAmount > 0 && betAmount > balance);
 
   return (
@@ -23,8 +24,9 @@ export function RollButton({ onClickAction, disabled = false, betAmount, balance
         type="button"
         className="w-full text-sm font-extrabold  tracking-wide disabled:cursor-not-allowed disabled:opacity-50"
         aria-label="Roll Now"
+        isLoading={isLoading}
       >
-        Roll Now
+        {isLoading ? 'Rolling...' : 'Roll Now'}
       </Button>
       {betAmount === 0 && (
         <div className="mt-1 flex items-center justify-center gap-2 rounded-lg bg-[rgba(36,238,137,0.1)] px-2 py-1">

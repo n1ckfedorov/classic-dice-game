@@ -48,6 +48,7 @@ export function GameInfo({
               value={payoutInput}
               onChange={e => onPayoutChangeAction(e.target.value)}
               onBlur={onPayoutBlurAction}
+              aria-label="Payout Input"
               disabled={isRolling}
               className="w-full focus:outline-none"
             />
