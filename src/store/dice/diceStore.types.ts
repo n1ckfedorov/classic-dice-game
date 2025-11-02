@@ -1,0 +1,25 @@
+import type { Bet, BetDirection, GameConfig, GameResult } from '@/types';
+
+export type DiceStore = {
+  balance: number;
+  gameConfig: GameConfig | null;
+  currentBet: Bet | null;
+  betAmount: number;
+  isRolling: boolean;
+  currentRoll: number | null;
+  rollStartTime: number | null;
+  targetPercent: number;
+  direction: BetDirection;
+  gameResults: GameResult[];
+  setGameConfig: (config: GameConfig) => void;
+  setBalance: (balance: number) => void;
+  setCurrentBet: (bet: Bet | null) => void;
+  setBetAmount: (amount: number) => void;
+  setIsRolling: (isRolling: boolean) => void;
+  setCurrentRoll: (roll: number | null) => void;
+  setRollStartTime: (time: number | null) => void;
+  setTargetPercent: (percent: number) => void;
+  setDirection: (direction: BetDirection) => void;
+  addGameResult: (result: GameResult) => void;
+  resetGame: () => void;
+};

@@ -1,3 +1,104 @@
 @layer theme, base, components, utilities;
 
 @import 'tailwindcss';
+@import 'tw-animate-css';
+
+@theme {
+  /* Colors */
+  --color-body-bg: rgb(35, 38, 38);
+  --color-input-button: rgb(58, 65, 66);
+  --color-layer1: rgb(30, 33, 33);
+  --color-layer2: rgb(35, 38, 38);
+  --color-layer3: rgb(41, 45, 46);
+  --color-layer4: rgb(50, 55, 56);
+  --color-layer5: rgb(58, 65, 66);
+  --color-layer6: rgb(74, 83, 84);
+  --color-primary: rgb(255, 255, 255);
+  --color-brand-secondary: rgb(26, 169, 100);
+  --color-input: rgb(58, 65, 66);
+  --color-muted-foreground: rgb(156, 163, 175);
+  --color-warning: rgb(255 152 32);
+  --color-secondary: rgb(179, 190, 193);
+  --color-brand: rgb(36, 238, 137);
+  --color-input_button: rgb(58, 65, 66);
+  --color-input_darken: rgb(30, 33, 33);
+  --color-input_bright: rgb(41, 45, 46);
+
+  /* Gradients */
+  --background-image-gradient-green: linear-gradient(90deg, rgb(36, 238, 137), rgb(159, 232, 113));
+
+  /* Shadows */
+  --shadow-green: rgba(35, 238, 136, 0.3) 0px 0px 12px, rgb(29, 202, 106) 0px -2px inset;
+}
+
+@utility container {
+  @apply w-full mx-auto max-w-[1232px] p-0;
+
+  @variant sm {
+    @apply px-4 pb-5;
+  }
+}
+
+@utility bg-gradient-green {
+  background-image: linear-gradient(90deg, #24ee89, #9fe871);
+}
+
+@layer base {
+  html {
+    font-size: 16px;
+  }
+
+  @media (max-width: 576px) {
+    html {
+      font-size: clamp(12px, 2.083vw, 16px);
+    }
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  /* Prevent layout shift from images */
+  img {
+    height: auto;
+    max-width: 100%;
+  }
+}
+
+@layer components {
+  .input {
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    border-radius: theme(borderRadius.lg);
+    border: 1px solid theme(colors.input);
+    padding-left: 0.75rem;
+    padding-right: 0.5rem;
+    gap: 0.5rem;
+    background-color: theme(colors.input_bright);
+    transition: all 0.35s ease;
+    color: theme(colors.primary);
+  }
+
+  input:focus {
+    outline: none;
+    caret-color: theme(colors.brand-secondary);
+  }
+
+  input[type='decimal'] {
+    -moz-appearance: textfield;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }
+
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+}

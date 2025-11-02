@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Sprite } from '@/components/Sprite';
 import '@/styles/global.css';
 
 export const metadata: Metadata = {
@@ -32,6 +33,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
+        <Sprite />
         {props.children}
       </body>
     </html>
