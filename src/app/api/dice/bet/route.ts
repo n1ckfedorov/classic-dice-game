@@ -50,7 +50,6 @@ export async function POST(request: NextRequest) {
 
     // Generate random number from 1 to 100
     const roll = faker.number.float({ min: gameConfig.custom_settings.min_target, max: gameConfig.custom_settings.max_target, fractionDigits: 2 });
-    // const roll = 75;
 
     // Apply precision first to ensure consistency between calculation and display
     const precision = gameConfig.custom_settings.precision;

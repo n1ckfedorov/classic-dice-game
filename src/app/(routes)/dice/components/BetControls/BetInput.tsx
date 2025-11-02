@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { useEffect, useRef, useState } from 'react';
 import { Button } from '@/components';
 import { Icon } from '@/components/Sprite';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip';
 import { cn } from '@/lib/utils';
 import { BetAmountSlider } from './BetAmountSlider';
 
@@ -20,6 +21,7 @@ type BetInputProps = {
   sliderMin?: number;
   sliderMax?: number;
   onSliderChangeAction?: (value: number) => void;
+  maxProfit: number;
 };
 
 const formatAmount = (amount: number) => {
@@ -51,6 +53,7 @@ export function BetInput({
   sliderMin,
   sliderMax,
   onSliderChangeAction,
+  maxProfit,
 }: BetInputProps) {
   const [inputInFocus, setInputInFocus] = useState(false);
   const [isSliderOpen, setIsSliderOpen] = useState(false);
@@ -85,12 +88,30 @@ export function BetInput({
     <>
       <div className="relative">
         <div className="mb-1 flex items-center justify-between">
-          <label htmlFor="bet-input" className="mr-1 flex h-4.5 items-center px-1 pl-1 text-sm font-extrabold text-secondary peer-disabled:cursor-not-allowed peer-disabled:opacity-40 data-[invalid]:text-secondary">Amount</label>
-          <div className="flex grow items-center">
-            <button type="button" aria-label="Info" className="size-4 focus-visible:outline-none">
-              <Icon name="info" size={16} className="text-brand" />
-            </button>
-          </div>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div className="flex items-center gap-1">
+                <label htmlFor="bet-input" className="mr-1 flex h-4.5 items-center px-1 pl-1 text-sm font-extrabold text-secondary peer-disabled:cursor-not-allowed peer-disabled:opacity-40 data-[invalid]:text-secondary">Amount</label>
+                <div className="flex grow items-center">
+                  <button type="button" aria-label="Info" className="size-4 focus-visible:outline-none">
+                    <Icon name="info" size={16} className="text-brand" />
+                  </button>
+                </div>
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              <p className="text-sm font-semibold whitespace-nowrap text-primary">
+                Max Profit:
+
+                UAH
+                {' '}
+                {' '}
+                {maxProfit?.toFixed(2)}
+
+              </p>
+            </TooltipContent>
+          </Tooltip>
+
         </div>
         <div className={cn('input rounded-lg pl-2 relative font-extrabold pr-1 h-10 transition-all duration-200', inputInFocus && 'border-brand')}>
           <input

@@ -19,7 +19,7 @@ export const useDiceStore = create<DiceStore>()(
       targetPercent: 75,
       direction: 'under',
       gameResults: [],
-      isSoundMuted: true,
+      isSoundMuted: false,
       isMovieMode: false,
       setGameConfig: (config: GameConfig) => set({ gameConfig: config }),
       setBalance: (balance: number) => set({ balance }),

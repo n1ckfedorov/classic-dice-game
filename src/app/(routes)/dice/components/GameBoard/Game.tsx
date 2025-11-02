@@ -163,7 +163,7 @@ export function Game() {
 
   return (
 
-    <div className="hide-scrollbar order-1 col-span-full  flex flex-col overflow-x-scroll rounded-t-xl bg-layer3 lg:order-2 lg:col-span-1 lg:h-full lg:rounded-tl-none lg:rounded-tr-xl lg:pt-2 xl:relative ">
+    <main className="hide-scrollbar order-1 col-span-full  flex flex-col overflow-x-scroll rounded-t-xl bg-layer3 lg:order-2 lg:col-span-1 lg:h-full lg:rounded-tl-none lg:rounded-tr-xl lg:pt-2 xl:relative ">
       <GameHistory />
       <div className="mt-12 lg:mt-20">
         <div className=" w-full flex-1 grow flex-col items-center justify-center overflow-hidden rounded-lg p-2">
@@ -205,6 +205,6 @@ export function Game() {
           />
         </div>
       </div>
-    </div>
+    </main>
   );
 }

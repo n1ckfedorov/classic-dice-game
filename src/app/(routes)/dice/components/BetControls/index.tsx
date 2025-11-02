@@ -52,14 +52,11 @@ export const BetControls = () => {
   }
 
   return (
-    <div className="order-2 col-span-full flex flex-col gap-3 rounded-t-none border-r border-input border-layer5 bg-layer4 pt-1 lg:relative lg:order-none lg:col-span-1 lg:h-full lg:overflow-y-auto lg:rounded-tl-xl lg:pt-0.5">
+    <aside className="order-2 col-span-full flex flex-col gap-3 rounded-t-none border-r border-input border-layer5 bg-layer4 pt-1 lg:relative lg:order-none lg:col-span-1 lg:h-full lg:overflow-y-auto lg:rounded-tl-xl lg:pt-0.5">
 
       <Tabs activeTab={activeTab} onTabChangeAction={setActiveTab} />
       <div className="flex flex-col px-3 pt-2">
-
-        {/* Amount Input */}
         <div className="flex flex-col gap-2">
-
           <BetInput
             value={betAmountInput}
             onChangeAction={handleAmountChange}
@@ -73,12 +70,10 @@ export const BetControls = () => {
             sliderMin={gameConfig.min_bet}
             sliderMax={sliderMax}
             onSliderChangeAction={handleSliderChange}
+            maxProfit={gameConfig.max_win}
           />
-
         </div>
-
         <WinAmountDisplay value={potentialWin} />
-
         <RollButton
           onClickAction={handlePlaceBetClick}
           disabled={isRolling}
@@ -86,11 +81,9 @@ export const BetControls = () => {
           balance={balance}
           isLoading={isRolling}
         />
-
         <ErrorMessage message={error} />
-
         <BalanceDisplay balance={balance} />
       </div>
-    </div>
+    </aside>
   );
 };
