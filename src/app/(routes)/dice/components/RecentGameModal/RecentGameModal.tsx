@@ -205,7 +205,7 @@ const GameContent = ({ onCloseAction, selectedGameResult }: GameContentProps) =>
                           Chance
                         </div>
                         <div className="mt-2 flex h-4 items-center justify-center text-base font-semibold whitespace-nowrap text-primary sm:text-sm">
-                          {data.target_percent}
+                          {data.direction === 'over' ? 100 - data.target_percent : data.target_percent}
                           {' '}
                           %
                         </div>
